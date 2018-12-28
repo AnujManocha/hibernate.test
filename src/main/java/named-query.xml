@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hibernate.inhertance.model">
+
+    <query name="find.employee.by.id">from RegularEmployee where id = :id</query>
+    <query name="update.employee">update RegularEmployee set salary=:amount where id = :id</query>    
+
+</hibernate-mapping>
