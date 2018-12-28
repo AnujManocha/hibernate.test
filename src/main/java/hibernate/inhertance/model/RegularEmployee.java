@@ -2,16 +2,16 @@ package hibernate.inhertance.model;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
+import org.hibernate.annotations.Cache;  
+import org.hibernate.annotations.CacheConcurrencyStrategy; 
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
 
 @Entity
 //@DiscriminatorValue("Regular_Employee")
 @Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)  
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)   
 public class RegularEmployee extends Employee {
 
 	private String salary;

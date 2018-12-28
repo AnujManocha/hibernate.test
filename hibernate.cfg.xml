@@ -15,8 +15,11 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
 		<!-- caching properties -->
-		<property name="cache.use_second_level_cache">true</property>
-		<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+      <property name = "hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+<!-- 		<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property> -->
+
+
 		<mapping class="hibernate.inhertance.model.Employee" />
 		<mapping class="hibernate.inhertance.model.Contract_Employee" />
 		<mapping class="hibernate.inhertance.model.RegularEmployee" />

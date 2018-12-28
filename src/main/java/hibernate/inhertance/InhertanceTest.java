@@ -2,13 +2,10 @@ package hibernate.inhertance;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
+import org.hibernate.SessionFactory;
 
-import hibernate.inhertance.model.Contract_Employee;
-import hibernate.inhertance.model.Employee;
 import hibernate.inhertance.model.RegularEmployee;
 import hibernate.test.HibernateUtil;
 
@@ -97,7 +94,8 @@ public class InhertanceTest {
 		
 		
 //		Query updateNamedQuery = session3.getNamedQuery("update.employee");
-		Session session3 = HibernateUtil.getSessionFactory().openSession();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session3 = factory.openSession();
 		Query updateNamedQuery = session3.createQuery("update RegularEmployee set salary=:amount where id=:id");
 		session3.beginTransaction();
 		updateNamedQuery.setParameter("id",3);
@@ -106,16 +104,22 @@ public class InhertanceTest {
 		int status_update = updateNamedQuery.executeUpdate();
 		System.out.println("status_update : " + status_update);
 		session3.getTransaction().commit();
+		session3.close();
 		
-		
-		Query namedQuery = session3.getNamedQuery("find.employee.by.id");
+		Session session4 = factory.openSession();
+		session4.beginTransaction();
+		Query namedQuery = session4.getNamedQuery("find.employee.by.id");
 		namedQuery.setParameter("id", 3);
 		System.out.println(namedQuery.getQueryString());
 		List<RegularEmployee> List2 = namedQuery.list();
 		System.out.println("List 2= "+ List2);
+		session4.close();
 		
-		List<RegularEmployee> List3 = namedQuery.list();
+		Session session5 = factory.openSession();
+		session5.beginTransaction();
+		RegularEmployee List3 = (RegularEmployee) session5.load(RegularEmployee.class, 3);
 		System.out.println("List 3= "+ List3);
+		session5.close();
 		
 	}
 }
